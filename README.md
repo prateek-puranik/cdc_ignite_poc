@@ -1,3 +1,7 @@
+<a href="https://ignite.apache.org/"><img src="https://github.com/apache/ignite-website/blob/master/assets/images/apache_ignite_logo.svg" hspace="20"/></a>
+
+
+
 # Apache Ignite CDC POC
 This project aims to implement Change Data Capture (CDC) on Apache Ignite, a high-performance, distributed in-memory data management system. The CDC process will capture data changes from an Oracle database using Oracle Advanced Queues (AQ) and Triggers and employ Spring integration to efficiently handle data flow. Additionally, JMS Async Listeners will be utilized to enable asynchronous listening from Oracle AQ and real-time updates to the Ignite cache. This solution provides a reliable, scalable, and near-real-time data synchronization mechanism, ideal for modern data-driven applications with stringent performance requirements.
 
@@ -5,8 +9,9 @@ This project aims to implement Change Data Capture (CDC) on Apache Ignite, a hig
 ## Table of Contents
 
 - [Presentation with Architecture](https://docs.google.com/presentation/d/1fGmRejLnh3N-vBukqeDXl2omd3cy44iencjgzINP8oo/edit?usp=sharing)
-- [Requirements](#requirements)
-- [Getting Started](#getting-started)
+- [Requirements]()
+- [Getting Started]()
+- [Gridgain View]()
 
 
 ## Requirements
@@ -48,17 +53,19 @@ This project aims to implement Change Data Capture (CDC) on Apache Ignite, a hig
       3. [Source Module mismatch error](https://stackoverflow.com/questions/29888592/errorjava-javactask-source-release-8-requires-target-release-1-8) - Go to the Project Settings and set everything to default.
  
 4. Open the JDBC Thin Client
+
    - Open another command-line window, and go to the {ignite}/bin folder.
      > sqlline.bat -u jdbc:ignite:thin://127.0.0.1/
    - Enter random username and password
    - If steps 1,2,3 and 4 have worked perfectly running the below query should fetch the Ignite Table auto created on start
      > select * from "SCHEMA".company_3;
- 
-5. Perform CDC
-   -
 
+5. Perform Change Data Capture
+   - Hit localhost:<server-port> GET Method to start the JMS Listner.
+   - Perform insert operations using the /api/insert API call or run SQL queries on sql to make changes to Table.
 
+## View of Ignite CLuster in Gridgain
 
-
-
-
+1. Unzip the GridGain Control center in the {ignite}/bin folder
+2. Run the below command and get the token to run on portal.gridgain.com
+   >management.bat --token
