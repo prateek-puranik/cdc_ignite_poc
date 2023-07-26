@@ -10,6 +10,9 @@ import org.springframework.stereotype.Component;
 import javax.jms.*;
 import java.sql.Timestamp;
 
+//Refer the steps mentioned in Enqueuing and Dequeuing of Object Type Messages (CustomDatum interface) Using Java
+//in the link https://docs.oracle.com/cd/B10500_01/appdev.920/a96587/apexampl.htm to create your own Async Listner
+// Refer https://rupalchatterjee.wordpress.com/tag/jms-asynchronous-receiver-example/ for Async JMS Listner for Oracle AQ
 
 @Component
 public class JMSListner implements MessageListener, ExceptionListener {
@@ -57,7 +60,7 @@ public class JMSListner implements MessageListener, ExceptionListener {
             System.out.println("Create Receiver...");
 
 
-            qrecv = ((AQjmsSession) qsess).createReceiver(queue, Message_typ_3.getORADataFactory());
+            qrecv = ((AQjmsSession) qsess).createReceiver(queue, Message_typ_3.getORADataFactory());  //Reference to custom Object created in Message_typ_3.java 
             //System.out.println(Thread.currentThread().getName());
             JMSListner fl = new JMSListner(asyncServices);
             qrecv.setMessageListener(fl);//
@@ -82,7 +85,7 @@ public class JMSListner implements MessageListener, ExceptionListener {
             System.out.println("Operation: " + msg.getOperation() + "\nPrimary Key: " + msg.getPrimaryKey() + "\nTimeStamp: " + msg.getTime());
             //System.out.println(Thread.currentThread().getName());
 
-            if (msg.getOperation().equals("INSERT")) {
+            if (msg.getOperation().equals("INSERT")) {                     //perform Async operations based on the change
                 asyncServices.insertIntoIgnite(msg.getPrimaryKey());
             } else if (msg.getOperation().equals("DELETE")) {
                 asyncServices.deleteFromIgnite(msg.getPrimaryKey());
