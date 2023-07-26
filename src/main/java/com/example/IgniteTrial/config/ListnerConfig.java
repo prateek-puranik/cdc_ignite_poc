@@ -42,7 +42,7 @@ public class ListnerConfig extends AsyncConfigurerSupport {
 
 
     /**
-     *Function to set the Thread Pool Parameters(Used in Async Functions)
+     *Function to set the Thread Pool Parameters(Used in Async Functions
      */
 
     @Override
